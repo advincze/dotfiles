@@ -17,5 +17,8 @@ Thumbs.db
 # IDEs stuff
 .idea
 
+# terraform state
+**/terraform.tfstate*
+
 #
 .foo

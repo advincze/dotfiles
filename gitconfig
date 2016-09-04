@@ -255,3 +255,6 @@
 [fetch]
         prune = true
 
+[user]
+  name = adam
+  email = advincze@gmail.com
