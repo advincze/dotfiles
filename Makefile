@@ -6,18 +6,11 @@ init:
 	./init.sh
 	
 bin:
-	mkdir -p $(HOME)/bin
-	# add aliases for things in bin
-	for file in $(shell find $(CURDIR)/bin -type f ); do \
-		f=$$(basename $$file); \
-		ln -sf $$file $(HOME)/bin/$$f; \
-	done
+	stow bin -t $(HOME)/bin
 
 dotfiles:
-	# add aliases for dotfiles
-	for file in $(shell find $(CURDIR) -depth 1 -not -name ".*" -type f ); do \
-		f=$$(basename $$file); \
-		ln -sfn $$file $(HOME)/.$$f; \
-	done; \
+	stow git -t $(HOME)
+	stow curl -t $(HOME)
+	stow shell -t $(HOME)
 
 .PHONY: init bin dotfiles
