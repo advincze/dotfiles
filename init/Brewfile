@@ -23,6 +23,7 @@ brew 'mackup'
 brew 'node'
 brew 'trash'
 brew 'wget'
+brew 'stow'
 
 # the_platinum_searcher
 brew 'pt'
