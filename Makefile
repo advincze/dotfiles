@@ -2,7 +2,9 @@
 all: bin dotfiles
 
 init:
-
+	cd init
+	./init.sh
+	
 bin:
 	mkdir -p $(HOME)/bin
 	# add aliases for things in bin
