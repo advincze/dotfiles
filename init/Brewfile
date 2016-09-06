@@ -33,6 +33,7 @@ brew 'git-extras'
 brew 'hub'
 brew 'jq'
 brew 'thefuck'
+brew 'terraform'
 
 cask 'dropbox'
 cask 'google-chrome'
