@@ -24,6 +24,7 @@ brew 'node'
 brew 'trash'
 brew 'wget'
 brew 'stow'
+brew 'caddy'
 
 # the_platinum_searcher
 brew 'pt'
