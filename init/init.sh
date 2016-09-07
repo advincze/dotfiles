@@ -25,4 +25,11 @@ brew bundle
 npm install -g diff-so-fancy
 
 
+#golang
+go get -u -v github.com/hirokidaichi/goviz
+go get -u -v github.com/nsf/gocode
+go get -u -v golang.org/x/tools/...
+go get -u -v github.com/gorilla/mux
+go get -u -v github.com/kardianos/govendor
+
 ./osx.sh

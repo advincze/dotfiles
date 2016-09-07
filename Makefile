@@ -1,12 +1,12 @@
 
 all: bin dotfiles
 
-init:
+init: bin dotfiles
 	cd init
 	./init.sh
 	
 bin:
-	stow bin -t $(HOME)/bin
+	mkdir -p $(HOME)/bin && stow bin -t $(HOME)/bin
 
 dotfiles:
 	stow git -t $(HOME)
