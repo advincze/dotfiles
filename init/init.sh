@@ -31,5 +31,6 @@ go get -u -v github.com/nsf/gocode
 go get -u -v golang.org/x/tools/...
 go get -u -v github.com/gorilla/mux
 go get -u -v github.com/kardianos/govendor
+go get -u -v github.com/cespare/reflex
 
 ./osx.sh
