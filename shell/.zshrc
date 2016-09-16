@@ -15,6 +15,7 @@ alias ohmyzsh="subl -n ~/.oh-my-zsh"
 source "$HOME/.path"
 source "$HOME/.aliases"
 source "$HOME/.functions"
+source "$HOME/.keys"
 
 #hub
 command -v hub >/dev/null && eval "$(hub alias -s)" || echo "hub Not Found in \$PATH"

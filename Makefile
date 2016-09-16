@@ -6,7 +6,7 @@ init: bin dotfiles
 	./init.sh
 	
 bin:
-	mkdir -p $(HOME)/bin && stow bin -t $(HOME)/bin
+	#mkdir -p $(HOME)/bin && stow bin -t $(HOME)/bin
 
 dotfiles:
 	stow git -t $(HOME)
