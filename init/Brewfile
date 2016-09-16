@@ -45,6 +45,7 @@ cask 'iterm2'
 cask 'skype'
 cask 'slack'
 cask 'sublime-text'
+cask 'shiftit'
 
 
 # Quicklook
