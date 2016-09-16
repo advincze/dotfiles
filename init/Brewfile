@@ -44,7 +44,7 @@ cask 'google-drive'
 cask 'iterm2'
 cask 'skype'
 cask 'slack'
-cask 'sublime-text3'
+cask 'sublime-text'
 
 
 # Quicklook
