@@ -38,6 +38,7 @@ brew 'jq'
 brew 'thefuck'
 brew 'terraform'
 
+cask 'docker-beta'
 cask 'dropbox'
 cask 'google-chrome'
 cask 'google-drive'
