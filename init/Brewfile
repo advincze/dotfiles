@@ -46,6 +46,7 @@ cask 'skype'
 cask 'slack'
 cask 'sublime-text'
 cask 'shiftit'
+cask 'caffeine'
 
 
 # Quicklook
