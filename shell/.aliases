@@ -18,6 +18,7 @@ alias o="open"
 alias ss="subl ."
 alias s="subl"
 alias dk="docker"
+alias dkc="docker-compose"
 
 alias mv='mv -v'
 alias rm='rm -i -v'
