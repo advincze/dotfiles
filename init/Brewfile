@@ -46,6 +46,7 @@ cask 'iterm2'
 cask 'skype'
 cask 'slack'
 cask 'sublime-text'
+cask 'visual-studio-code'
 cask 'shiftit'
 cask 'caffeine'
 
