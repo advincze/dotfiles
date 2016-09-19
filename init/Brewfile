@@ -16,7 +16,7 @@ brew 'findutils'
 
 # go
 brew 'go'
-
+brew 'python3'
 
 # Install Binaries
 brew 'awscli'
