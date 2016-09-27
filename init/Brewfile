@@ -37,6 +37,7 @@ brew 'hub'
 brew 'jq'
 brew 'thefuck'
 brew 'terraform'
+brew 'protobuf'
 
 cask 'docker-beta'
 cask 'dropbox'

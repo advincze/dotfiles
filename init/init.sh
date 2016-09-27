@@ -35,5 +35,5 @@ go get -u -v github.com/cespare/reflex
 go get -u -v github.com/davecgh/go-spew/spew #golang struct pretty printer lib
 go get -u -v github.com/pkg/errors
 go get -u -v github.com/olivere/iterm2-imagetools/...
-
+go get -u -v github.com/golang/protobuf/protoc-gen-go
 ./osx.sh
