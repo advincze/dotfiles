@@ -86,3 +86,20 @@ EOF
 	cd $GOPATH_LAST/src/github.com/advincze/$PKG_NAME
 }
 
+
+gotemp() {
+  PKG_DIR="/tmp/test"$(date +%Y%m%d%H%M%S)
+  mkdir -p $PKG_DIR
+  cat>$PKG_DIR/main.go<<EOF
+package main
+
+import "fmt"
+
+func main() {
+  fmt.Println("tmp")
+}
+EOF
+
+  cd $PKG_DIR
+}
+
