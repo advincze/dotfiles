@@ -51,6 +51,8 @@ cask 'sublime-text'
 cask 'visual-studio-code'
 cask 'shiftit'
 cask 'caffeine'
+cask 'virtualbox'
+cask 'vagrant'
 
 
 # Quicklook
