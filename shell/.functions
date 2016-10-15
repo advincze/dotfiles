@@ -88,7 +88,8 @@ EOF
 
 
 gotemp() {
-  PKG_DIR="/tmp/test"$(date +%Y%m%d%H%M%S)
+  PKG_DIR="/tmp/go/src/test"$(date +%Y%m%d%H%M%S)
+  GOPATH=${GOPATH}:/tmp/go
   mkdir -p $PKG_DIR
   cat>$PKG_DIR/main.go<<EOF
 package main
@@ -97,6 +98,16 @@ import "fmt"
 
 func main() {
   fmt.Println("tmp")
+}
+EOF
+
+  cat>$PKG_DIR/main_test.go<<EOF
+package main
+
+import "testing"
+
+func TestFoo(t *testing.T) {
+  t.Errorf("test fail")
 }
 EOF
 
