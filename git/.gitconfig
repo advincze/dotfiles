@@ -258,3 +258,5 @@
 [user]
   name = adam
   email = advincze@gmail.com
+[hub]
+	host = github.bus.zalan.do

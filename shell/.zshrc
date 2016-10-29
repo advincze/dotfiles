@@ -19,6 +19,9 @@ source "$HOME/.keys"
 
 #hub
 command -v hub >/dev/null && eval "$(hub alias -s)" || echo "hub Not Found in \$PATH"
+command -v hub >/dev/null && alias ghe="GITHUB_HOST=github.bus.zalan.do hub"
+
+
 
 #fuck
 command -v thefuck >/dev/null && eval $(thefuck --alias) || echo "thefuck Not Found in \$PATH"
