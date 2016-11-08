@@ -161,3 +161,5 @@ alias untar='tar xvf'
 alias brwe=brew  #typos
 alias terrafrom=terraform  #typos
 alias tf=terraform  #typos
+
+alias uuid="uuidgen | tr '[:upper:]' '[:lower:]'"
