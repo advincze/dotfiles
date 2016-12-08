@@ -12,6 +12,7 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="subl -n ~/.zshrc"
 alias ohmyzsh="subl -n ~/.oh-my-zsh"
 
+if [ -c "$HOME/.secret" ]; then source "$HOME/.secret"; fi
 source "$HOME/.path"
 source "$HOME/.aliases"
 source "$HOME/.functions"
