@@ -163,3 +163,6 @@ alias terrafrom=terraform  #typos
 alias tf=terraform  #typos
 
 alias uuid="uuidgen | tr '[:upper:]' '[:lower:]'"
+
+alias co="code ."
+alias vs="code ."
