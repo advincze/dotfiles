@@ -114,3 +114,9 @@ EOF
   cd $PKG_DIR
 }
 
+func kmsdecrypt(){
+  TMP=`mktemp`
+  base64 -D >>$TMP <<< $1 
+  aws kms decrypt --ciphertext-blob=fileb://$TMP | jq -r .Plaintext | base64 -D
+}
+
