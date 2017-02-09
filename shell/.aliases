@@ -166,3 +166,5 @@ alias uuid="uuidgen | tr '[:upper:]' '[:lower:]'"
 
 alias co="code ."
 alias vs="code ."
+
+alias goget="go get -u -v"
