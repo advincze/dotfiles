@@ -120,3 +120,14 @@ func kmsdecrypt(){
   aws kms decrypt --ciphertext-blob=fileb://$TMP | jq -r .Plaintext | base64 -D
 }
 
+func gw(){
+  BRANCH=$1
+  PWD=`pwd`
+  DIR=`basename $PWD`
+  WT_DIR="$DIR-$BRANCH"
+  git branch $BRANCH
+  git worktree add ../$WT_DIR $BRANCH
+  cd ../$WT_DIR
+}
+
+
