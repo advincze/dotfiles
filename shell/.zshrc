@@ -8,6 +8,11 @@ plugins=(autojump git brew sublime osx docker)
 
 source $ZSH/oh-my-zsh.sh
 
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+PROMPT='${ret_status} %{$fg[cyan]%}%2~%{$reset_color%} $(git_prompt_info)'
+
+
 # aliases
 alias zshconfig="subl -n ~/.zshrc"
 alias ohmyzsh="subl -n ~/.oh-my-zsh"
@@ -27,3 +32,5 @@ command -v thefuck >/dev/null && eval $(thefuck --alias) || echo "thefuck Not Fo
 
 export LC_ALL=en_US.utf-8
 export LANG=en_US.utf-8
+
+
