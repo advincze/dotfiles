@@ -27,10 +27,8 @@ source "$HOME/.keys"
 command -v hub >/dev/null && eval "$(hub alias -s)" || echo "hub Not Found in \$PATH"
 command -v hub >/dev/null && alias ghe="GITHUB_HOST=github.bus.zalan.do hub"
 
-#fuck
-command -v thefuck >/dev/null && eval $(thefuck --alias) || echo "thefuck Not Found in \$PATH"
-
 export LC_ALL=en_US.utf-8
 export LANG=en_US.utf-8
 
+source /usr/local/bin/aws_zsh_completer.sh
 

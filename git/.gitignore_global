@@ -25,4 +25,7 @@ Thumbs.db
 .foo
 .ci
 
+
 debug.test
+
+.env.json
