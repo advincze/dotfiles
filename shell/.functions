@@ -130,4 +130,8 @@ func gw(){
   cd ../$WT_DIR
 }
 
+func s3cat() {
+  TM=`mktemp -d` && aws s3 cp --recursive $1 $TM > /dev/null  && cat $TM/*
+}
+
 
