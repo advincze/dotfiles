@@ -1,3 +1,0 @@
-bindkey "\e\e[D" backward-word 			#option+left
-bindkey "\e\e[C" forward-word 			#option+right
-bindkey "^[[3~" backward-kill-word 		#fn+delete

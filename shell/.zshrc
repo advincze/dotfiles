@@ -15,9 +15,7 @@ PROMPT='${ret_status} %{$fg[cyan]%}%2~%{$reset_color%} $(git_prompt_info)'
 
 if [ -e "$HOME/.secret" ]; then source "$HOME/.secret"; fi
 # path
-export PATH=$PATH:$HOME/bin
-export GOPATH=$HOME
-export CDPATH=.:$GOPATH/src/github.com:$GOPATH/src/golang.org:$GOPATH/src:$GOPATH/src/github.bus.zalan.do
+export PATH=$PATH:$HOME/bin:$HOME/go/bin
 
 #aliases
 alias ..="cd .."
