@@ -36,6 +36,10 @@ alias reload="exec $SHELL -l"
 alias tf=terraform
 alias vs="code ."
 alias uuid="uuidgen | tr '[:upper:]' '[:lower:]'"
+alias goget="go get -u -v"
+alias zk=zkubectl
+alias k=kubectl
+
 
 
 # Determine size of a file or total size of a directory
