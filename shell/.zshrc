@@ -107,3 +107,4 @@ export LANG=en_US.utf-8
 
 source /usr/local/bin/aws_zsh_completer.sh
 
+eval "$(rbenv init -)"
