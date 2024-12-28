@@ -1,10 +1,14 @@
 {
-  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.6/.schema/devbox.schema.json",
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
   "packages": [
     "autojump@latest",
     "zsh-syntax-highlighting@latest",
     "zsh-autosuggestions@latest",
-    "zsh-history-substring-search@latest"
+    "zsh-history-substring-search@latest",
+    "coreutils@latest",
+    "findutils@latest",
+    "git@latest",
+    "thefuck@latest",
   ],
   "shell": {
     "init_hook": [
@@ -13,11 +17,12 @@
       "source ${DEVBOX_PACKAGES_DIR}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh",
       "source ${DEVBOX_PACKAGES_DIR}/share/zsh-autosuggestions/zsh-autosuggestions.zsh",
       "source ${DEVBOX_PACKAGES_DIR}/share/zsh-history-substring-search/zsh-history-substring-search.zsh",
+      "eval $(thefuck --alias)",
     ],
     "scripts": {
       "test": [
-        "echo \"Error: no test specified\" && exit 1"
-      ]
-    }
-  }
+        "echo \"Error: no test specified\" && exit 1",
+      ],
+    },
+  },
 }
