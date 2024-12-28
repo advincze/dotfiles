@@ -1,0 +1,6 @@
+dotfiles:
+  - .zshrc
+  - .devbox.zsh
+  - .theme.zsh
+  - .gitignore_global
+  - .config/karabiner/karabiner.json

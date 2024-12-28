@@ -1,11 +1,14 @@
 # dotfiles
 
-init tools and update osx settings
+A tool to manage your dotfiles, Homebrew packages, and Devbox configuration.
+
+## Setup
+
+Install [devbox](https://www.jetify.com/docs/devbox/installing_devbox/)
+
+## Usage:
+
 ```
-make init
+devbox run uv run dotfiles.py
 ```
 
-link dotfiles
-```
-make
-```
