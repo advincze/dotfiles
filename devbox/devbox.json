@@ -6,12 +6,15 @@
     "git@latest",
     "thefuck@latest",
     "sheldon@latest",
+    "jq@latest",
+    "bat@latest",
   ],
   "shell": {
     "init_hook": [
       "echo 'Welcome to devbox!' > /dev/null",
       "eval \"$(sheldon -q --non-interactive source)\"",
       "eval \"$(thefuck --alias)\"",
+      "alias cat='bat'",
     ],
     "scripts": {
       "test": [
