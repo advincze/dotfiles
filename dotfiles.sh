@@ -1,85 +1,84 @@
 #!/usr/bin/env bash
 #
-# A script for a more structured dotfiles repo:
-#  - home/    : mirrors your $HOME structure (e.g., .config/karabiner/karabiner.json)
-#  - devbox/  : holds devbox.json
-#  - brew/    : holds Brewfile
+# A dotfiles management script where 'install' has subcommands:
+#   install dotfiles   - Install dotfiles from home/ to $HOME
+#   install brew       - Install Homebrew packages from brew/Brewfile
+#   install devbox     - Copy devbox/devbox.json to global devbox path
+#   install all        - Do all of the above in sequence
 #
-# Subcommands:
-#   backup         - Copy local dotfiles from $HOME into home/, dump Brewfile, etc.
-#   install        - Copy dotfiles from home/ back into $HOME.
-#   install-brew   - Install or update Homebrew packages from brew/Brewfile.
-#   install-devbox - Copy devbox/devbox.json into global Devbox path (if Devbox installed).
+# Other Commands:
+#   backup             - Copy local dotfiles ($HOME) into home/, plus dump Brewfile, copy devbox.json, etc.
 #
-# This script does NOT automatically perform any 'git pull', 'git add', 'git commit',
-# or 'git push'. That’s up to you.
+# Git is NOT automatic. Pull before install, and add/commit/push after backup.
 
 set -euo pipefail
 
 #######################################
-# Repository Structure
+# 1. Load config.sh (Defines DOTFILES array)
 #######################################
-
-# Where this script lives (root of the dotfiles repo)
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ ! -f "$DOTFILES_DIR/config.sh" ]]; then
+  echo "Error: config.sh not found. Please create config.sh with a DOTFILES array."
+  exit 1
+fi
+# shellcheck disable=SC1091
+source "$DOTFILES_DIR/config.sh"
 
-# Subfolders under the repo
+#######################################
+# 2. Subfolders
+#######################################
 HOME_SUBDIR="$DOTFILES_DIR/home"
 DEVBOX_SUBDIR="$DOTFILES_DIR/devbox"
 BREW_SUBDIR="$DOTFILES_DIR/brew"
 
-# Ensure subfolders exist
 mkdir -p "$HOME_SUBDIR" "$DEVBOX_SUBDIR" "$BREW_SUBDIR"
 
 #######################################
-# Files We Manage
+# 3. Devbox Setup
 #######################################
-# These are paths *relative* to $HOME. For example:
-#   .zshrc                => $HOME/.zshrc
-#   .config/karabiner/karabiner.json => $HOME/.config/karabiner/karabiner.json
-DOTFILES=(
-  ".zshrc"
-  ".devbox.zsh"
-  ".theme.zsh"
-  ".gitignore_global"
-  ".config/karabiner/karabiner.json"
-)
-
-# Devbox setup
 if command -v devbox &>/dev/null; then
   DEVBOX_INSTALLED=true
   DEVBOX_GLOBAL_JSON="$(devbox global path)/devbox.json"
 else
   DEVBOX_INSTALLED=false
 fi
-
-# We'll store devbox.json in devbox/devbox.json
 DEVBOX_REPO_JSON="$DEVBOX_SUBDIR/devbox.json"
 
-# Homebrew Brewfile location in the repo
+#######################################
+# 4. Homebrew Brewfile
+#######################################
 BREWFILE="$BREW_SUBDIR/Brewfile"
 
 #######################################
-# Helper: show usage
+# Usage
 #######################################
 usage() {
-  cat <<-EOF
-Usage: $(basename "$0") [backup|install|install-brew|install-devbox]
+  cat <<EOF
+Usage: $(basename "$0") <command> [subcommand]
 
 Commands:
-  backup         Copy local dotfiles from \$HOME into home/, also copy devbox.json
-                 if present, and dump Homebrew packages into brew/Brewfile.
-  install        Copy dotfiles from home/ back to \$HOME (mirroring the structure).
-  install-brew   Install or update Homebrew packages from brew/Brewfile.
-  install-devbox Copy devbox/devbox.json to your global Devbox path (if Devbox installed).
+  backup
+    Copy local dotfiles from \$HOME into home/, copy devbox.json, dump Brewfile.
 
-No Git commands are run automatically—commit/push/pull as needed.
+  install <subcommand>
+    Subcommands:
+      dotfiles  - Copy dotfiles from home/ -> \$HOME
+      brew      - Install or update Homebrew packages (brew/Brewfile)
+      devbox    - Copy devbox/devbox.json -> global devbox path
+      all       - Do dotfiles, brew, devbox in sequence
+
+Example:
+  ./sync-dotfiles.sh backup
+  ./sync-dotfiles.sh install dotfiles
+  ./sync-dotfiles.sh install all
+
+No Git commands are run automatically.
 EOF
   exit 1
 }
 
 #######################################
-# backup: from $HOME => repo
+# backup: from $HOME => home/
 #######################################
 backup_changes() {
   echo "=== BACKUP: Copying dotfiles from \$HOME into '$HOME_SUBDIR' ==="
@@ -96,13 +95,12 @@ backup_changes() {
   done
 
   echo
-  echo "=== BACKUP: Copying devbox.json (if Devbox is installed) ==="
+  echo "=== BACKUP: Copying devbox.json if devbox is installed ==="
   if [[ "$DEVBOX_INSTALLED" == true && -f "$DEVBOX_GLOBAL_JSON" ]]; then
-    mkdir -p "$DEVBOX_SUBDIR"
     cp "$DEVBOX_GLOBAL_JSON" "$DEVBOX_REPO_JSON"
     echo "  Copied $DEVBOX_GLOBAL_JSON -> $DEVBOX_REPO_JSON"
   else
-    echo "  Warning: devbox not installed or no devbox.json found. Skipping..."
+    echo "  Warning: devbox not installed or devbox.json not found. Skipping..."
   fi
 
   echo
@@ -110,14 +108,14 @@ backup_changes() {
   brew bundle dump --force --file="$BREWFILE"
 
   echo
-  echo "=== Backup complete! (Manually git add/commit/push if desired.) ==="
+  echo "=== Backup complete! (You may now git add/commit/push.) ==="
 }
 
 #######################################
-# install: from repo => $HOME
+# install_changes: DOTFILES from home/ => $HOME
 #######################################
-install_changes() {
-  echo "=== INSTALL: Copying dotfiles from '$HOME_SUBDIR' back to \$HOME ==="
+install_dotfiles() {
+  echo "=== INSTALL: DOTFILES from '$HOME_SUBDIR' to \$HOME ==="
   for rel_path in "${DOTFILES[@]}"; do
     repo_path="$HOME_SUBDIR/$rel_path"
     local_path="$HOME/$rel_path"
@@ -126,37 +124,35 @@ install_changes() {
       mkdir -p "$(dirname "$local_path")"
       cp "$repo_path" "$local_path"
     else
-      echo "  Warning: '$repo_path' not found. Skipping..."
+      echo "  Warning: '$repo_path' not found in repo. Skipping..."
     fi
   done
-
-  echo
-  echo "=== INSTALL complete! (For Brew, run 'install-brew'. For Devbox, run 'install-devbox'.) ==="
+  echo "=== Dotfiles install complete! ==="
 }
 
 #######################################
-# install-brew: from brew/Brewfile => local Homebrew
+# install_brew: from brew/Brewfile => local Homebrew
 #######################################
-install_brew_changes() {
-  echo "=== INSTALL-BREW: Installing or updating Homebrew packages from '$BREWFILE' ==="
+install_brew() {
+  echo "=== INSTALL: BREW packages from '$BREWFILE' ==="
   if [[ -f "$BREWFILE" ]]; then
     brew bundle --file="$BREWFILE"
   else
     echo "  Warning: Brewfile not found at '$BREWFILE'. Skipping..."
   fi
-  echo "=== Done installing Homebrew packages! ==="
+  echo "=== Brew packages install complete! ==="
 }
 
 #######################################
-# install-devbox: from devbox/devbox.json => global devbox path
+# install_devbox: from devbox/devbox.json => global devbox path
 #######################################
-install_devbox_changes() {
+install_devbox() {
   if [[ "$DEVBOX_INSTALLED" != true ]]; then
     echo "Error: Devbox is not installed or not found in PATH."
     exit 1
   fi
 
-  echo "=== INSTALL-DEVBOX: Copying devbox.json from '$DEVBOX_REPO_JSON' to '$DEVBOX_GLOBAL_JSON' ==="
+  echo "=== INSTALL: DEVBOX config from '$DEVBOX_REPO_JSON' => '$DEVBOX_GLOBAL_JSON' ==="
   if [[ -f "$DEVBOX_REPO_JSON" ]]; then
     mkdir -p "$(devbox global path)"
     cp "$DEVBOX_REPO_JSON" "$DEVBOX_GLOBAL_JSON"
@@ -164,12 +160,41 @@ install_devbox_changes() {
   else
     echo "  Warning: '$DEVBOX_REPO_JSON' not found. Skipping..."
   fi
-
-  echo "=== Done installing devbox.json! ==="
+  echo "=== Devbox install complete! ==="
 }
 
 #######################################
-# Main: parse subcommand
+# dispatch_install: calls subcommands
+#######################################
+dispatch_install() {
+  if [[ $# -lt 2 ]]; then
+    usage
+  fi
+
+  local subcommand="$2"
+  case "$subcommand" in
+    dotfiles)
+      install_dotfiles
+      ;;
+    brew)
+      install_brew
+      ;;
+    devbox)
+      install_devbox
+      ;;
+    all)
+      install_dotfiles
+      install_brew
+      install_devbox
+      ;;
+    *)
+      usage
+      ;;
+  esac
+}
+
+#######################################
+# Main CLI
 #######################################
 if [[ $# -lt 1 ]]; then
   usage
@@ -180,13 +205,8 @@ case "$1" in
     backup_changes
     ;;
   install)
-    install_changes
-    ;;
-  install-brew)
-    install_brew_changes
-    ;;
-  install-devbox)
-    install_devbox_changes
+    # Delegates to dispatch_install to handle "dotfiles", "brew", "devbox", or "all"
+    dispatch_install "$@"
     ;;
   *)
     usage

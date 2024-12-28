@@ -1,11 +1,6 @@
 # dotfiles
 
-init tools and update osx settings
+usage:
 ```
-make init
-```
-
-link dotfiles
-```
-make
+./dotfiles.sh --help
 ```
