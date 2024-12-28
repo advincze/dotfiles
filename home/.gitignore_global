@@ -1,0 +1,35 @@
+# IDEs and editors
+.idea
+.vscode/
+
+# Python
+__pycache__/
+.venv/
+
+# Terraform
+.terraform/
+**/terraform.tfstate*
+
+# Environment variables
+.env
+
+# Devbox
+.devbox/
+
+# macOS
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Windows
+Desktop.ini
+Thumbs.db
+
+# Miscellaneous
+.foo
+.ci
+
+# Temporary files
+._*
+*~
+

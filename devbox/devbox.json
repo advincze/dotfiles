@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.6/.schema/devbox.schema.json",
+  "packages": [
+    "autojump@latest",
+    "zsh-syntax-highlighting@latest",
+    "zsh-autosuggestions@latest",
+    "zsh-history-substring-search@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null",
+      "source ${DEVBOX_PACKAGES_DIR}/share/autojump/autojump.zsh",
+      "source ${DEVBOX_PACKAGES_DIR}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh",
+      "source ${DEVBOX_PACKAGES_DIR}/share/zsh-autosuggestions/zsh-autosuggestions.zsh",
+      "source ${DEVBOX_PACKAGES_DIR}/share/zsh-history-substring-search/zsh-history-substring-search.zsh",
+    ],
+    "scripts": {
+      "test": [
+        "echo \"Error: no test specified\" && exit 1"
+      ]
+    }
+  }
+}
