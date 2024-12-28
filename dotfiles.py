@@ -6,12 +6,13 @@
 # ]
 # ///
 
-import click
-import yaml
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
+
+import click
+import yaml
 
 REPO_DIR = Path(__file__).parent.resolve()
 HOME_DIR = Path.home()
@@ -25,9 +26,10 @@ with CONFIG_PATH.open() as f:
 DOTFILES = config["dotfiles"]
 
 BREWFILE = BREW_SUBDIR / "Brewfile"
-DEVBOX_GLOBAL_JSON = Path(
-    subprocess.check_output(["devbox", "global", "path"], text=True).strip()
-) / "devbox.json"
+DEVBOX_GLOBAL_JSON = (
+    Path(subprocess.check_output(["devbox", "global", "path"], text=True).strip())
+    / "devbox.json"
+)
 DEVBOX_REPO_JSON = DEVBOX_SUBDIR / "devbox.json"
 
 
@@ -46,7 +48,9 @@ def backup():
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
     shutil.copy2(DEVBOX_GLOBAL_JSON, DEVBOX_REPO_JSON)
-    subprocess.run(["brew", "bundle", "dump", "--force", "--file", str(BREWFILE)], check=True)
+    subprocess.run(
+        ["brew", "bundle", "dump", "--force", "--file", str(BREWFILE)], check=True
+    )
 
 
 @cli.group(help="Install dotfiles, brew packages, devbox.json, or all at once.")
@@ -61,7 +65,9 @@ def dotfiles(dry_run):
         src = HOME_SUBDIR / path
         dst = HOME_DIR / path
         if dry_run:
-            diff = subprocess.run(["diff", "-u", str(dst), str(src)], text=True, capture_output=True)
+            diff = subprocess.run(
+                ["diff", "-u", str(dst), str(src)], text=True, capture_output=True
+            )
             if diff.returncode != 0:
                 click.echo(path)
                 click.echo()
@@ -76,8 +82,15 @@ def dotfiles(dry_run):
 def brew(dry_run):
     if dry_run:
         with tempfile.NamedTemporaryFile(delete_on_close=True) as tmp_file:
-            subprocess.run(["brew", "bundle", "dump", "--force", "--file", str(tmp_file.name)], check=True)
-            diff = subprocess.run(["diff", "-u", str(tmp_file.name), str(BREWFILE)], text=True, capture_output=True)
+            subprocess.run(
+                ["brew", "bundle", "dump", "--force", "--file", str(tmp_file.name)],
+                check=True,
+            )
+            diff = subprocess.run(
+                ["diff", "-u", str(tmp_file.name), str(BREWFILE)],
+                text=True,
+                capture_output=True,
+            )
             if diff.returncode != 0:
                 click.echo(diff.stdout)
     else:
@@ -88,7 +101,11 @@ def brew(dry_run):
 @click.option("--dry-run", is_flag=True, help="Show diff instead of installing.")
 def devbox(dry_run):
     if dry_run:
-        diff = subprocess.run(["diff", "-u", DEVBOX_GLOBAL_JSON, DEVBOX_REPO_JSON], text=True, capture_output=True)
+        diff = subprocess.run(
+            ["diff", "-u", DEVBOX_GLOBAL_JSON, DEVBOX_REPO_JSON],
+            text=True,
+            capture_output=True,
+        )
         if diff.returncode != 0:
             click.echo(diff.stdout)
     else:
@@ -96,7 +113,9 @@ def devbox(dry_run):
         shutil.copy2(DEVBOX_REPO_JSON, DEVBOX_GLOBAL_JSON)
 
 
-@install.command(name="all", help="Install dotfiles, brew packages, and devbox.json in sequence.")
+@install.command(
+    name="all", help="Install dotfiles, brew packages, and devbox.json in sequence."
+)
 @click.option("--dry-run", is_flag=True, help="Show diff instead of installing.")
 def install_all(dry_run):
     ctx = click.get_current_context()
