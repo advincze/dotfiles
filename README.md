@@ -2,5 +2,5 @@
 
 usage:
 ```
-./dotfiles.sh --help
+devbox run uv run dotfiles.py
 ```
