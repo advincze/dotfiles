@@ -18,6 +18,8 @@ alias dk="docker"
 alias vs="code"
 alias dkc="docker compose"
 alias dr="devbox run"
+alias ur="uv run"
+alias dur="devbox run uv run"
 alias k="kubectl"
 
 alias reload="source ~/.zshrc"
@@ -41,6 +43,7 @@ alias ls='ls -G'
 alias md='mkdir -p'
 alias gss='git status --short'
 alias gco='git checkout '
+alias gcb='git checkout -b'
 alias gcam='git commit -am'
 alias gd='git diff'
 alias uuid="uuidgen | tr '[:upper:]' '[:lower:]'"

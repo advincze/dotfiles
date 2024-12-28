@@ -4,3 +4,4 @@ dotfiles:
   - .theme.zsh
   - .gitignore_global
   - .config/karabiner/karabiner.json
+  - .config/sheldon/plugins.toml
