@@ -63,10 +63,10 @@ export PATH="/Users/a77055/.rd/bin:$PATH"
 
 function clone() {
   local git_url=$1
-  local base_dir=~/src2
+  local base_dir=~/src
 
   if [[ -z "$git_url" ]]; then
-    echo "Usage: git_clone_with_hierarchy <git_url>"
+    echo "Usage: clone <git_url>"
     return 1
   fi
 
@@ -81,6 +81,9 @@ function clone() {
     local repo_path=${match[3]}
     # Remove 'ssh.' prefix if it exists
     host=${host#ssh.}
+  elif [[ $git_url =~ ^https://([^/]+)/(.+)$ ]]; then
+    local host=${match[1]}
+    local repo_path=${match[2]}
   else
     echo "Unsupported git URL format: $git_url"
     return 1
