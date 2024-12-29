@@ -61,3 +61,37 @@ bindkey "^[[3~" backward-kill-word 		#fn+delete
 export PATH="/Users/a77055/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
+function clone() {
+  local git_url=$1
+  local base_dir=~/src2
+
+  if [[ -z "$git_url" ]]; then
+    echo "Usage: git_clone_with_hierarchy <git_url>"
+    return 1
+  fi
+
+  # Extract the host and path from the git URL
+  if [[ $git_url =~ ^git@([^:]+):(.*)$ ]]; then
+    local host=${match[1]}
+    local repo_path=${match[2]}
+    # Remove 'ssh.' prefix if it exists
+    host=${host#ssh.}
+  elif [[ $git_url =~ ^ssh://git@([^:/]+)(:[0-9]+)?/(.*)$ ]]; then
+    local host=${match[1]}
+    local repo_path=${match[3]}
+    # Remove 'ssh.' prefix if it exists
+    host=${host#ssh.}
+  else
+    echo "Unsupported git URL format: $git_url"
+    return 1
+  fi
+
+  # Determine the full local path for cloning
+  local full_path="$base_dir/$host/${repo_path%.*}"
+
+  # Create the directory hierarchy if it doesn't exist
+  mkdir -p "$(dirname "$full_path")"
+
+  # Clone the repository
+  git clone "$git_url" "$full_path"
+}
