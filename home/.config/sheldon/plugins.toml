@@ -4,11 +4,6 @@ shell = "zsh"
 
 [plugins]
 
-[plugins.autojump]
-github = "wting/autojump"
-dir = "bin"
-apply = ["PATH", "source"]
-
 [plugins.completions]
 github = "zsh-users/zsh-completions"
 
@@ -21,3 +16,5 @@ github = "zsh-users/zsh-history-substring-search"
 [plugins.highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 
+[plugins.zoxide]
+github = "ajeetdsouza/zoxide"

@@ -8,6 +8,7 @@
     "sheldon@latest",
     "jq@latest",
     "bat@latest",
+    "zoxide@latest",
   ],
   "shell": {
     "init_hook": [
