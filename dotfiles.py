@@ -53,13 +53,13 @@ def backup():
     )
 
 
-@cli.group(help="Install dotfiles, brew packages, devbox.json, or all at once.")
-def install():
+@cli.group(help="restore dotfiles, brew packages, devbox.json, or all at once.")
+def restore():
     pass
 
 
-@install.command(help="Install dotfiles from repo back to your home directory.")
-@click.option("--dry-run", is_flag=True, help="Show diff instead of installing.")
+@restore.command(help="restore dotfiles from repo back to your home directory.")
+@click.option("--dry-run", is_flag=True, help="Show diff instead of restoring.")
 def dotfiles(dry_run):
     for path in DOTFILES:
         src = HOME_SUBDIR / path
@@ -77,8 +77,8 @@ def dotfiles(dry_run):
             shutil.copy2(src, dst)
 
 
-@install.command(help="Install or update Homebrew packages from Brewfile.")
-@click.option("--dry-run", is_flag=True, help="Show diff instead of installing.")
+@restore.command(help="restore or update Homebrew packages from Brewfile.")
+@click.option("--dry-run", is_flag=True, help="Show diff instead of restoring.")
 def brew(dry_run):
     if dry_run:
         with tempfile.NamedTemporaryFile(delete_on_close=True) as tmp_file:
@@ -97,8 +97,8 @@ def brew(dry_run):
         subprocess.run(["brew", "bundle", "--file", str(BREWFILE)], check=True)
 
 
-@install.command(help="Install devbox.json to devbox global path.")
-@click.option("--dry-run", is_flag=True, help="Show diff instead of installing.")
+@restore.command(help="restore devbox.json to devbox global path.")
+@click.option("--dry-run", is_flag=True, help="Show diff instead of restoring.")
 def devbox(dry_run):
     if dry_run:
         diff = subprocess.run(
@@ -113,11 +113,11 @@ def devbox(dry_run):
         shutil.copy2(DEVBOX_REPO_JSON, DEVBOX_GLOBAL_JSON)
 
 
-@install.command(
-    name="all", help="Install dotfiles, brew packages, and devbox.json in sequence."
+@restore.command(
+    name="all", help="restore dotfiles, brew packages, and devbox.json in sequence."
 )
-@click.option("--dry-run", is_flag=True, help="Show diff instead of installing.")
-def install_all(dry_run):
+@click.option("--dry-run", is_flag=True, help="Show diff instead of restoring.")
+def restore_all(dry_run):
     ctx = click.get_current_context()
     ctx.invoke(dotfiles, dry_run=dry_run)
     ctx.invoke(brew, dry_run=dry_run)

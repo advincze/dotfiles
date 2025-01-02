@@ -64,6 +64,54 @@
           "store_path": "/nix/store/w7cs06nn9vvk8a59nv48y4biv9zzv43x-uv-0.4.30"
         }
       }
+    },
+    "zunit@latest": {
+      "last_modified": "2024-12-03T12:40:06Z",
+      "resolved": "github:NixOS/nixpkgs/566e53c2ad750c84f6d31f9ccb9d00f823165550#zunit",
+      "source": "devbox-search",
+      "version": "0.8.2",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/qljqs2yyygy196fxpwnajldpghn8gm0k-zunit-0.8.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/qljqs2yyygy196fxpwnajldpghn8gm0k-zunit-0.8.2"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/s5cggypxmi36zfb06pw9pp1ynccnxs52-zunit-0.8.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/s5cggypxmi36zfb06pw9pp1ynccnxs52-zunit-0.8.2"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/sdrz4r5zk9bwp9plqqs4wph096pl01wr-zunit-0.8.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/sdrz4r5zk9bwp9plqqs4wph096pl01wr-zunit-0.8.2"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/v2lqggc7k0szgm8bj41j3wd709sby89l-zunit-0.8.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/v2lqggc7k0szgm8bj41j3wd709sby89l-zunit-0.8.2"
+        }
+      }
     }
   }
 }

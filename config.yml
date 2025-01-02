@@ -1,7 +1,8 @@
 dotfiles:
   - .zshrc
-  - .devbox.zsh
-  - .theme.zsh
   - .gitignore_global
+  - .config/devbox.zsh
+  - .config/theme.zsh
+  - .config/functions.zsh
   - .config/karabiner/karabiner.json
   - .config/sheldon/plugins.toml
