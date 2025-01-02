@@ -1,6 +1,7 @@
 dotfiles:
   - .zshrc
   - .gitignore_global
+  - Library/Application Support/com.mitchellh.ghostty/config
   - .config/devbox.zsh
   - .config/theme.zsh
   - .config/functions.zsh

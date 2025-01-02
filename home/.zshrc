@@ -16,11 +16,6 @@ source ~/.config/devbox.zsh
 source ~/.config/functions.zsh
 source ~/.config/aliases.zsh
 
-#keys
-bindkey "\e\e[D" backward-word 			#option+left
-bindkey "\e\e[C" forward-word 			#option+right
-bindkey "^[[3~" backward-kill-word 		#fn+delete
-
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/a77055/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
