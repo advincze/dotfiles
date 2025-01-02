@@ -13,6 +13,10 @@ function _clone__get_full_path() {
     if [[ $git_url =~ ^git@([^:]+):(.*)$ ]]; then
         local host=${match[1]}
         local repo_path=${match[2]}
+         # Special handling for Azure URLs with 'v3'
+        if [[ $host == "ssh.dev.azure.com" && $repo_path =~ ^v3/(.*)$ ]]; then
+            repo_path=${match[1]}
+        fi
         # Remove 'ssh.' prefix if it exists
         host=${host#ssh.}
     elif [[ $git_url =~ ^ssh://git@([^:/]+)(:[0-9]+)?/(.*)$ ]]; then
