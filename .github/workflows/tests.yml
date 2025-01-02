@@ -1,0 +1,16 @@
+name: ZUnit Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install devbox
+      uses: jetify-com/devbox-install-action@v0.11.0
+    - name: Run ZUnit tests
+      run: |
+        make test
