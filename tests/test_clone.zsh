@@ -27,3 +27,10 @@
   assert $state equals 0
   assert $output same_as "$HOME/src/github.com/vinta/awesome-python"
 }
+
+@test '_clone__get_full_path codecommit::eu-central-1://ffc-automation' {
+  run _clone__get_full_path codecommit::eu-central-1://ffc-automation
+  assert $state equals 0
+  assert $output same_as "$HOME/src/codecommit/ffc-automation"
+}
+

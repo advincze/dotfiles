@@ -13,7 +13,7 @@ function _clone__get_full_path() {
     if [[ $git_url =~ ^git@([^:]+):(.*)$ ]]; then
         local host=${match[1]}
         local repo_path=${match[2]}
-         # Special handling for Azure URLs with 'v3'
+        # Special handling for Azure URLs with 'v3'
         if [[ $host == "ssh.dev.azure.com" && $repo_path =~ ^v3/(.*)$ ]]; then
             repo_path=${match[1]}
         fi
@@ -26,6 +26,9 @@ function _clone__get_full_path() {
         host=${host#ssh.}
     elif [[ $git_url =~ ^https://([^/]+)/(.+)$ ]]; then
         local host=${match[1]}
+        local repo_path=${match[2]}
+    elif [[ $git_url =~ ^codecommit::([^:]+)://(.*)$ ]]; then
+        local host="codecommit"
         local repo_path=${match[2]}
     else
         echo "Unsupported git URL format: $git_url"
