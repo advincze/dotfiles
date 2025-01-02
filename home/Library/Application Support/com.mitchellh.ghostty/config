@@ -1,1 +1,3 @@
 keybind = super+backspace=text:\x15
+macos-titlebar-style = tabs
+macos-non-native-fullscreen = true
