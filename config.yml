@@ -4,5 +4,6 @@ dotfiles:
   - .config/devbox.zsh
   - .config/theme.zsh
   - .config/functions.zsh
+  - .config/aliases.zsh
   - .config/karabiner/karabiner.json
   - .config/sheldon/plugins.toml
