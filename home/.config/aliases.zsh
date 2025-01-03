@@ -2,6 +2,7 @@
 alias tf="terraform"
 alias dk="docker"
 alias vs="code"
+alias vss="code ."
 alias dkc="docker compose"
 alias dr="devbox run"
 alias ur="uv run"
