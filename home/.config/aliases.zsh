@@ -1,13 +1,12 @@
 
 alias tf="terraform"
 alias dk="docker"
-alias vs="code"
-alias vss="code ."
 alias dkc="docker compose"
 alias dr="devbox run"
 alias ur="uv run"
 alias dur="devbox run uv run"
 alias k="kubectl"
+alias j="__zoxide_z"
 
 alias reload="source ~/.zshrc"
 alias o="open"

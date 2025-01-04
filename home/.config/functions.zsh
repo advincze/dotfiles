@@ -61,3 +61,11 @@ function clone() {
     # Clone the repository
     git clone "$git_url" "$full_path"
 }
+
+function vs() {
+    if [ $# -eq 0 ]; then
+        code .
+    else
+        code "$@"
+    fi
+}
