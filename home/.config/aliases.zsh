@@ -32,6 +32,7 @@ alias gco='git checkout '
 alias gcb='git checkout -b'
 alias gcam='git commit -am'
 alias gd='git diff'
+alias gnuke='git clean -fdx -e .env -e .envrc'
 alias uuid="uuidgen | tr '[:upper:]' '[:lower:]'"
 # Show/hide hidden files in the Finder
 alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
