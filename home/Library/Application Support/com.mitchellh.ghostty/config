@@ -2,5 +2,5 @@ keybind = super+backspace=text:\x15
 macos-titlebar-style = tabs
 macos-non-native-fullscreen = true
 keybind = super+f=write_screen_file:open
-background-opacity = 0.5
+background-opacity = 0.9
 background-blur-radius = 20
