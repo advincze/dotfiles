@@ -69,3 +69,22 @@ function vs() {
         code "$@"
     fi
 }
+
+function git_delete_local_branches() {
+  # Get the name of the current branch
+  local current_branch=$(git symbolic-ref --short HEAD)
+
+  # Get the list of local branches, excluding main, master, and the current branch
+  local branches_to_delete=$(git branch | grep -vE "^\*|main|master" | awk '{$1=$1};1')
+
+  if [[ -z "$branches_to_delete" ]]; then
+    echo "No branches to delete."
+    return 0
+  fi
+
+  echo "Deleting the following branches:"
+  echo "$branches_to_delete"
+
+  # Delete the branches
+  git branch -D $branches_to_delete
+}
