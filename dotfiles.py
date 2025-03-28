@@ -26,17 +26,10 @@ with CONFIG_PATH.open() as f:
 DOTFILES = config["dotfiles"]
 
 BREWFILE = BREW_SUBDIR / "Brewfile"
-DEVBOX_GLOBAL_JSON = (
-    Path(subprocess.check_output(["devbox", "global", "path"], text=True).strip())
-    / "devbox.json"
-)
-DEVBOX_REPO_JSON = DEVBOX_SUBDIR / "devbox.json"
-
 
 @click.group(help="Manage your dotfiles, devbox config, and Brewfile.")
 def cli():
     HOME_SUBDIR.mkdir(exist_ok=True)
-    DEVBOX_SUBDIR.mkdir(exist_ok=True)
     BREW_SUBDIR.mkdir(exist_ok=True)
 
 
@@ -47,7 +40,6 @@ def backup():
         dst = HOME_SUBDIR / path
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
-    shutil.copy2(DEVBOX_GLOBAL_JSON, DEVBOX_REPO_JSON)
     subprocess.run(
         ["brew", "bundle", "dump", "--force", "--file", str(BREWFILE)], check=True
     )
@@ -97,22 +89,6 @@ def brew(dry_run):
         subprocess.run(["brew", "bundle", "--file", str(BREWFILE)], check=True)
 
 
-@restore.command(help="restore devbox.json to devbox global path.")
-@click.option("--dry-run", is_flag=True, help="Show diff instead of restoring.")
-def devbox(dry_run):
-    if dry_run:
-        diff = subprocess.run(
-            ["diff", "-u", DEVBOX_GLOBAL_JSON, DEVBOX_REPO_JSON],
-            text=True,
-            capture_output=True,
-        )
-        if diff.returncode != 0:
-            click.echo(diff.stdout)
-    else:
-        DEVBOX_GLOBAL_JSON.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(DEVBOX_REPO_JSON, DEVBOX_GLOBAL_JSON)
-
-
 @restore.command(
     name="all", help="restore dotfiles, brew packages, and devbox.json in sequence."
 )
@@ -121,7 +97,7 @@ def restore_all(dry_run):
     ctx = click.get_current_context()
     ctx.invoke(dotfiles, dry_run=dry_run)
     ctx.invoke(brew, dry_run=dry_run)
-    ctx.invoke(devbox, dry_run=dry_run)
+
 
 
 def main():
