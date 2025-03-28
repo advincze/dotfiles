@@ -17,7 +17,6 @@ import yaml
 REPO_DIR = Path(__file__).parent.resolve()
 HOME_DIR = Path.home()
 HOME_SUBDIR = REPO_DIR / "home"
-DEVBOX_SUBDIR = REPO_DIR / "devbox"
 BREW_SUBDIR = REPO_DIR / "brew"
 CONFIG_PATH = REPO_DIR / "config.yml"
 
