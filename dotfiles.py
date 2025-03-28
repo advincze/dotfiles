@@ -26,6 +26,7 @@ DOTFILES = config["dotfiles"]
 
 BREWFILE = BREW_SUBDIR / "Brewfile"
 
+
 @click.group(help="Manage your dotfiles, devbox config, and Brewfile.")
 def cli():
     HOME_SUBDIR.mkdir(exist_ok=True)
@@ -96,7 +97,6 @@ def restore_all(dry_run):
     ctx = click.get_current_context()
     ctx.invoke(dotfiles, dry_run=dry_run)
     ctx.invoke(brew, dry_run=dry_run)
-
 
 
 def main():
