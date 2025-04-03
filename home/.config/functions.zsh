@@ -70,6 +70,14 @@ function vs() {
     fi
 }
 
+function cs() {
+    if [ $# -eq 0 ]; then
+        cursor .
+    else
+        cursor "$@"
+    fi
+}
+
 function git_delete_local_branches() {
   # Get the name of the current branch
   local current_branch=$(git symbolic-ref --short HEAD)
