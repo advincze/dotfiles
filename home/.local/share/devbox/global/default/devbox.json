@@ -10,6 +10,8 @@
     "bat@latest",
     "zoxide@latest",
     "uv@latest",
+    "duckdb@latest",
+    "just@latest",
   ],
   "shell": {
     "init_hook": [
