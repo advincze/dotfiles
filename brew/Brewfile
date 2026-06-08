@@ -1,4 +1,3 @@
-tap "homebrew/bundle"
 cask "ghostty"
 cask "google-chrome"
 cask "karabiner-elements"
